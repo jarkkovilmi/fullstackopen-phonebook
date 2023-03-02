@@ -4,17 +4,24 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
-  hello_world_job:
+  deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
-        run: |
-          echo "Hello World!"
-      - name: Now it is
-        run: |
-          date
-      - name: Directory content
-        run: |
-          ls -l
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install server
+        run: npm install
+      - name: npm install client
+        working-directory: ./client
+        run: npm install
+      - name: lint
+        run: npm run lint
+      - name: build
+        run: npm run build:ui
