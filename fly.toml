@@ -48,7 +48,7 @@ processes = []
 	[services.http_checks.headers]
 
 [deploy]
-  release_command = "npm run build"
+  release_command = "npm run build:ui"
 
 [processes]
-  app = "node app.js"
+  app = "node index.js"
