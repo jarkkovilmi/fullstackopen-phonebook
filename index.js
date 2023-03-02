@@ -18,6 +18,14 @@ morgan.token('post-body', (request, _response) => {
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :post-body'))
 
+app.get('/health', (req, res) => {
+	res.send('ok')
+})
+
+app.get('/version', (req, res) => {
+	res.send('1') // change this string to ensure a new version deployed
+})
+
 app.get('/info', (_request, response, next) => {
 	Person.find({})
 		.then(persons => {
