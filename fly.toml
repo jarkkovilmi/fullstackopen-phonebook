@@ -47,8 +47,5 @@ processes = []
 	tls_skip_verify = false
 	[services.http_checks.headers]
 
-[deploy]
-  release_command = "npm run build:ui"
-
 [processes]
   app = "node index.js"
